@@ -12,7 +12,7 @@ namespace AutoTikTok
         public string Name;
         public enum Types
         {
-            Image,BackGround,outPut,CustomMainFolder
+            Image,BackGround,outPut
         }
         public Types Type;
 

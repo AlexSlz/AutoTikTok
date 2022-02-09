@@ -19,7 +19,7 @@ namespace AutoTikTok
             Thread notifyThread = new Thread(delegate () {
                 notificationIcon = new NotifyIcon()
                 {
-                    Icon = System.Drawing.SystemIcons.Asterisk,
+                    Icon = new System.Drawing.Icon("e.ico"),
                     Text = Console.Title
                 };
                 notificationIcon.DoubleClick += (s, e) =>

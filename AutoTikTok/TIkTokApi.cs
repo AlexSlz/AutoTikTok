@@ -1,11 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace AutoTikTok
 {
@@ -58,10 +55,21 @@ namespace AutoTikTok
                 Thread.Sleep(1000);
                 textBox.SendKeys(Keys.Enter);
             });
+            
             Console.WriteLine("Final Stage...");
-            Browser.FindElement(By.XPath("//div[contains(@class, 'op-part-v2')]/button[contains(@class, 'tiktok-btn-pc-primary')]")).Click();
-            Thread.Sleep(5000);
+            var element = Browser.FindElement(By.XPath("//div[contains(@class, 'op-part-v2')]/button[contains(@class, 'tiktok-btn-pc-primary')]"));
+            ((IJavaScriptExecutor)Browser).ExecuteScript("arguments[0].scrollIntoView(true);", element);
+            element.Click();
+            //ScreenShot();
+            Thread.Sleep(3000);
             Browser.Quit();
         }
+
+        void ScreenShot()
+        {
+            Screenshot ss = ((ITakesScreenshot)Browser).GetScreenshot();
+            ss.SaveAsFile("Image.png", ScreenshotImageFormat.Png);
+        }
+
     }
 }

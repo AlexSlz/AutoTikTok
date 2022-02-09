@@ -22,10 +22,17 @@ namespace AutoTikTok
                     Icon = new System.Drawing.Icon("e.ico"),
                     Text = Console.Title
                 };
-                notificationIcon.DoubleClick += (s, e) =>
+                notificationIcon.MouseClick += (s, e) =>
                 {
-                    Visible = !Visible;
-                    SetConsoleWindowVisibility(Visible);
+                    if (e.Button == MouseButtons.Right)
+                    {
+                        Process.Start(AppDomain.CurrentDomain.BaseDirectory);
+                    }
+                    else
+                    {
+                        Visible = !Visible;
+                        SetConsoleWindowVisibility(Visible);
+                    }
                 };
                 notificationIcon.Visible = true;
                 Application.Run();

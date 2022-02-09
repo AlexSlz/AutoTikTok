@@ -14,7 +14,8 @@ namespace AutoTikTok
         public TIkTokApi(Settings settings, bool hideBrowser = false)
         {
             this.settings = settings;
-            settings.Write("HashTags", "#анимеприколы #аниметоп #анимемемы #аниме #мемы");
+            if(!settings.KeyExists("HashTags"))
+                settings.Write("HashTags", "#анимеприколы #аниметоп #анимемемы #аниме #мемы");
             this.hideBrowser = hideBrowser;
         }
 

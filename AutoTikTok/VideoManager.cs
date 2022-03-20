@@ -44,8 +44,9 @@ namespace AutoTikTok
         {
             using (StreamWriter batFile = new StreamWriter(Path.Combine(path, "temp.bat"), false, Encoding.Default))
             {
-                batFile.WriteLine($"ffmpeg -i {Path.Combine(path, folders.selectFolder(Folders.Types.BackGround), bgFileName)} -vf \"crop = ih * (9 / 16):ih\" -crf 1 -c:a copy {Path.Combine(path, folders.selectFolder(Folders.Types.outPut), "tempInput.mp4")} -y");
-                batFile.WriteLine($"ffmpeg -i {Path.Combine(path, folders.selectFolder(Folders.Types.outPut), "tempInput.mp4")} -i {Path.Combine(path, folders.selectFolder(Folders.Types.Image), imageFileName)} -filter_complex \"[1:v]scale = 480:-2[ovrl],[0:v][ovrl]overlay = (main_w - overlay_w) / 2:(main_h - overlay_h) / 2\" -codec:a copy {Path.Combine(path, folders.selectFolder(Folders.Types.outPut), outPutFileName)} -y");
+                //ih * (9 / 16)
+                batFile.WriteLine($"ffmpeg -i {Path.Combine(path, folders.selectFolder(Folders.Types.BackGround), bgFileName)} -vf \"crop=502:ih\" -crf 1 -c:a copy {Path.Combine(path, folders.selectFolder(Folders.Types.outPut), "tempInput.mp4")} -y");
+                batFile.WriteLine($"ffmpeg -i {Path.Combine(path, folders.selectFolder(Folders.Types.outPut), "tempInput.mp4")} -i {Path.Combine(path, folders.selectFolder(Folders.Types.Image), imageFileName)} -filter_complex \"[1:v]scale = 502:(ih+502)/2.5[ovrl],[0:v][ovrl]overlay = (main_w - overlay_w) / 2:(main_h - overlay_h) / 2\" -codec:a copy {Path.Combine(path, folders.selectFolder(Folders.Types.outPut), outPutFileName)} -y");
                 batFile.WriteLine($"del {Path.Combine(path, folders.selectFolder(Folders.Types.outPut), "tempInput.mp4")}");
                 batFile.WriteLine("del %0");
             }

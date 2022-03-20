@@ -73,11 +73,11 @@ namespace AutoTikTok
 
         void DrawTime()
         {
-            Console.WriteLine();
-            string msg = $"| Time To next Video: {CalcTime()} |\r\r";
+            Console.WriteLine("\r");
+            string msg = $" Time To next Video: {CalcTime()}\r\r";
             Console.SetCursorPosition(0, 1);
             Console.Write(msg);
-            Console.WriteLine("\n");
+            Console.WriteLine("\r\n");
         }
 
         string CalcTime()
@@ -85,6 +85,10 @@ namespace AutoTikTok
             TimeSpan res = TimeSpan.Zero;
             if (settings.KeyExists("NextVideoCreateTime", "Video"))
             {
+                if(Directory.GetFiles(Path.Combine(path, "data", settings.Read("ImageFolder", "FoldersName")), "*.*", SearchOption.AllDirectories).Length <= 0)
+                {
+                    return "Empty...";
+                }
                 res = DateTime.Parse(settings.Read("NextVideoCreateTime", "Video")) - DateTime.Now;
                 if (res <= TimeSpan.Zero) api.UploadVideo(videoManager.MakeRandVideo());
                 return $"{res.ToString(@"hh\:mm\:ss")} ({settings.Read("NextVideoCreateTime", "Video").Split(' ')[1]})";
@@ -105,10 +109,10 @@ namespace AutoTikTok
                     Draw(false);
                     Console.WriteLine();
                     item.action();
+                    Console.Clear();
                     Draw(true);
                 }
             }
-            Console.Clear();
             ReadMenuKey();
         }
 

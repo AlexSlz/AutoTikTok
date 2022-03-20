@@ -70,5 +70,9 @@ namespace AutoTikTok
             int randBgIndex = r.Next(allfiles.Count);
             return Path.GetFileName(allfiles[randBgIndex]);
         }
+        public bool FileExist(string folderName)
+        {
+            return Directory.GetFiles(Path.Combine(path, folderName), "*.*", SearchOption.AllDirectories).Length < 0;
+        }
     }
 }

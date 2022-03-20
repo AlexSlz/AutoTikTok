@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
@@ -50,12 +51,16 @@ namespace AutoTikTok
 
             textBox.SendKeys(Keys.Control + "a" + Keys.Delete);
             Console.WriteLine("Write HashTags...");
-            settings.Read("HashTags").Split(' ').ToList().ForEach(hashTag =>
+
+            List<string> hashTags = settings.Read("HashTags").Split(' ').ToList();
+            hashTags.Reverse();
+
+            foreach (var tag in hashTags)
             {
-                textBox.SendKeys(hashTag);
+                textBox.SendKeys(tag);
                 Thread.Sleep(1000);
                 textBox.SendKeys(Keys.Enter);
-            });
+            }
             
             Console.WriteLine("Final Stage...");
             var element = Browser.FindElement(By.XPath("//div[contains(@class, 'op-part-v2')]/button[contains(@class, 'tiktok-btn-pc-primary')]"));
@@ -63,6 +68,7 @@ namespace AutoTikTok
             element.Click();
             //ScreenShot();
             Thread.Sleep(3000);
+            Browser.Close();
             Browser.Quit();
         }
 

@@ -45,7 +45,8 @@ namespace AutoTikTok
             Browser.SwitchTo().Frame(Browser.FindElement(By.XPath("//iframe[contains(@src, 'https://www.tiktok.com/creator#/upload')]")));
             Thread.Sleep(5000);
             Console.WriteLine("Upload Video...");
-            Browser.FindElement(By.CssSelector("[name=\"upload-btn\"]")).SendKeys(videoPath);
+            //Browser.FindElement(By.CssSelector("[name=\"upload-btn\"]")).SendKeys(videoPath);
+            Browser.FindElement(By.XPath("//input[@accept=\"video/*\"]")).SendKeys(videoPath);
             Thread.Sleep(5000);
             var textBox = Browser.FindElement(By.XPath("//div[@role=\"combobox\"]"));
 

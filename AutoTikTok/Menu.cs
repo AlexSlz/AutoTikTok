@@ -34,7 +34,7 @@ namespace AutoTikTok
         public Menu(string path, VideoManager video)
         {
             this.path = path;
-            api = new TIkTokApi(new Settings(path, "TikTokApi"), true);
+            api = new TIkTokApi(new Settings(path, "TikTokApi"), false);
             videoManager = video;
             menuItems = new[] { 
                 new MenuItem(ConsoleKey.D1,"MakeVideo", new Action(()=> videoManager.MakeRandVideo())), 
